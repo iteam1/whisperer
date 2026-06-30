@@ -31,11 +31,23 @@ Use the Claude Code CLI you're already running as a Copilot-style completion eng
 
 See [`docs/design.md`](./docs/design.md) for the full data flow.
 
-## Get started
+## Each session
 
-See [`GUIDELINE.md`](./GUIDELINE.md) for setup (one-time build + symlink) and daily usage.
+```bash
+# 1. start the broker
+bun run --cwd packages/broker dev
+
+# 2. install the slash command into your current project
+mkdir -p .claude/commands && cp assets/whisper.md .claude/commands/whisper.md
+```
+
+Then open the project in VSCode, click into a file, and `/whisper`.
 
 > Restarted the broker? It forgets everything — reload the VSCode window so the extension re-registers.
+
+## First time?
+
+See [`GUIDELINE.md`](./GUIDELINE.md) for the one-time extension build + symlink install.
 
 ## Related reading
 
