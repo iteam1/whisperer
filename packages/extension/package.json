@@ -1,0 +1,47 @@
+{
+    "name": "whisperer",
+    "displayName": "Whisperer",
+    "description": "Claude Code ghost-text completions in VSCode",
+    "version": "0.0.1",
+    "publisher": "locch",
+    "engines": {
+        "vscode": "^1.85.0"
+    },
+    "activationEvents": ["onStartupFinished"],
+    "main": "./out/extension.js",
+    "scripts": {
+        "build": "tsc -p tsconfig.json",
+        "watch": "tsc -p tsconfig.json --watch"
+    },
+    "contributes": {
+        "commands": [
+            {
+                "command": "whisperer.acceptDiff",
+                "title": "Whisperer: Accept Suggestion",
+                "icon": "$(check)"
+            }
+        ],
+        "menus": {
+            "editor/title": [
+                {
+                    "command": "whisperer.acceptDiff",
+                    "when": "whisperer.diffOpen",
+                    "group": "navigation"
+                }
+            ]
+        },
+        "keybindings": [
+            {
+                "key": "ctrl+enter",
+                "mac": "cmd+enter",
+                "command": "whisperer.acceptDiff",
+                "when": "whisperer.diffOpen"
+            }
+        ]
+    },
+    "devDependencies": {
+        "@types/node": "^20.0.0",
+        "@types/vscode": "^1.85.0",
+        "typescript": "^5.0.0"
+    }
+}

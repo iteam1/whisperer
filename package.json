@@ -1,0 +1,9 @@
+{
+  "name": "whisperer",
+  "private": true,
+  "workspaces": ["packages/*"],
+  "devDependencies": {
+    "@biomejs/biome": "latest",
+    "@types/node": "^26.0.1"
+  }
+}

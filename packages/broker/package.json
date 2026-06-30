@@ -1,0 +1,11 @@
+{
+    "name": "@whisperer/broker",
+    "private": true,
+    "scripts": {
+        "dev": "bun --watch src/index.ts",
+        "start": "bun src/index.ts"
+    },
+    "devDependencies": {
+        "bun-types": "latest"
+    }
+}
