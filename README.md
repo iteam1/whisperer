@@ -45,25 +45,36 @@ Then open the project in VSCode, click into a file, and `/whisper`.
 
 > Restarted the broker? It forgets everything — reload the VSCode window so the extension re-registers.
 
-## Subscription ran out? Use GLM
+## Alternative backends
 
-[Z.ai's GLM Coding Plan](https://z.ai/subscribe) is a flat-rate alternative (~$10–80/month)
-with a native Anthropic-compatible endpoint — no proxy, no Ollama, just swap two env vars:
+Whisperer doesn't care what model runs the completion. Swap the backend, `/whisper` keeps working.
+
+### GLM / Z.ai (cloud, flat-rate)
+
+[Z.ai's GLM Coding Plan](https://z.ai/subscribe) (~$10–80/month) has a native
+Anthropic-compatible endpoint — no proxy needed:
 
 ```bash
 export ANTHROPIC_BASE_URL="https://api.z.ai/api/coding/paas/v4"
 export ANTHROPIC_AUTH_TOKEN="your-zai-api-key"
-# then use claude as normal — /whisper works unchanged
+claude --model glm-4.7
 ```
 
-Or persist it permanently:
+### Ollama (local)
+
+Ollama speaks OpenAI format, so you need LiteLLM as a shim:
 
 ```bash
-claude config set -g env.ANTHROPIC_BASE_URL "https://api.z.ai/api/coding/paas/v4"
-claude config set -g env.ANTHROPIC_AUTH_TOKEN "your-zai-api-key"
+litellm --model ollama/qwen2.5-coder:7b --port 4000
+
+export ANTHROPIC_BASE_URL="http://localhost:4000"
+export ANTHROPIC_AUTH_TOKEN="sk-local"
+export CLAUDE_CODE_ENABLE_GATEWAY_MODEL_DISCOVERY=1
 ```
 
-See [`docs/local-backends.md`](./docs/local-backends.md) for Ollama and LM Studio options too.
+To persist either config: `claude config set -g env.ANTHROPIC_BASE_URL "<url>"` and `claude config set -g env.ANTHROPIC_AUTH_TOKEN "<key>"`.
+
+See [`docs/local-backends.md`](./docs/local-backends.md) for more options.
 
 ## First time?
 
