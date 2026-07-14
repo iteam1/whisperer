@@ -12,10 +12,12 @@ Use the Claude Code CLI you're already running as a Copilot-style completion eng
 | `medium` | a whole block | ghost text |
 | `high` | the whole file | diff → accept with ✓ / `Cmd+Enter` |
 
+Examples:
+
 ```
-/whisper          # medium (default)
-/whisper low
-/whisper high
+<prompt>? /whisper          # medium (default)
+<prompt>? /whisper low
+<prompt>? /whisper high
 /whisper check    # is the broker talking to VSCode?
 ```
 
